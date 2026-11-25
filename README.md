@@ -1,0 +1,33 @@
+# Gregale Benchmarks & Reproducible Studies
+
+Public benchmark datasets, verification scripts, and runnable fixtures from [Gregale](https://gregale.dev) infrastructure studies.
+
+> **Note:** This repository publishes benchmark data, analysis scripts, and sample fixtures. The Gregale platform itself is proprietary software.
+
+## Published studies
+
+| Study | Date measured | Key result | Verify locally | Canonical report |
+|---|---|---|---|---|
+| **Intermittent FastAPI compute cost** | 2026-11-24 | Burst traffic used **42.9% less billable compute** than spread traffic for the same 8 requests (2,112 vs 3,696 MB-seconds; 0.086 vs 0.150 GB-RAM-h projected at 40 req/day) | `python3 intermittent-fastapi-cost-2026-11-24/analyze.py --verify` | [Read report](https://gregale.dev/research/intermittent-fastapi-cost-2026-11-24) |
+| **Firecracker snapshot restore on SSD** | 2026-09-09 | 100 sequential snapshot restores on an SSD-backed node: **94.795 ms p50**, **137.756 ms p95**, **149.067 ms max** (`wake.boot_started` → `wake.boot_completed`; 0 samples ≥ 350 ms) | `python3 firecracker-snapshot-restore-ssd-2026-09-09/analyze.py --verify` | [Read report](https://gregale.dev/research/firecracker-snapshot-restore-ssd-2026-09-09) |
+
+## Quick verification
+
+Every check uses Python 3.11+ and the Python standard library only (no third-party packages required):
+
+```sh
+python3 intermittent-fastapi-cost-2026-11-24/analyze.py --verify
+python3 firecracker-snapshot-restore-ssd-2026-09-09/analyze.py --verify
+```
+
+## Machine-readable Gregale endpoints
+
+- Agent index: [`https://gregale.dev/llms.txt`](https://gregale.dev/llms.txt) ([core subset](https://gregale.dev/llms-small.txt), [full](https://gregale.dev/llms-full.txt))
+- Plans & pricing JSON: [`https://gregale.dev/pricing.json`](https://gregale.dev/pricing.json)
+- Atom feed (articles & research): [`https://gregale.dev/feed.xml`](https://gregale.dev/feed.xml)
+- Hosted Management MCP server (preview): `https://api.gregale.dev/mcp`
+
+## Repository layout
+
+- `intermittent-fastapi-cost-2026-11-24/` — FastAPI fixture (`gregale.yaml`, `main.py`, `requirements.txt`), traffic/state/ledger captures, pricing snapshot, and `analyze.py` / `run.py`.
+- `firecracker-snapshot-restore-ssd-2026-09-09/` — 100-sample scheduler restore CSV (`samples.csv`), `summary.json`, and `analyze.py`.

@@ -1,0 +1,17 @@
+{
+  "samples": 100,
+  "snapshot_restores": 100,
+  "all_artifacts_cached": 100,
+  "max_concurrency_at_admission": 0,
+  "max_queue_depth_at_admission": 0,
+  "platform_ms": {
+    "min": 73.094,
+    "mean": 99.011,
+    "p50": 94.795,
+    "p90": 131.502,
+    "p95": 137.756,
+    "p99": 148.229,
+    "max": 149.067
+  },
+  "platform_samples_at_or_above_350_ms": 0
+}
